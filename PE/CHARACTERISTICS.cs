@@ -2,8 +2,10 @@
 
 namespace PE
 {
+	/// <summary>
+	/// Describes the characteristics of the PE image as part of the <see cref="IMAGE_FILE_HEADER"/>.
+	/// </summary>
 	[Flags]
-	
 	// ReSharper disable InconsistentNaming
 	public enum CHARACTERISTICS : ushort
 	{

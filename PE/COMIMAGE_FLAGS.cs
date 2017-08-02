@@ -1,5 +1,11 @@
-﻿namespace PE
+﻿using System;
+
+namespace PE
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	[Flags]
 	// ReSharper disable InconsistentNaming
 	public enum COMIMAGE_FLAGS : uint
 	{

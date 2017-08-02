@@ -166,7 +166,7 @@ namespace PE
 		/// </summary>
 		public uint e_lfanew;
 
-		public static unsafe IMAGE_DOS_HEADER Read(BinaryReader reader)
+		internal static unsafe IMAGE_DOS_HEADER Read(BinaryReader reader)
 		{
 			IMAGE_DOS_HEADER value;
 			byte* ptr = (byte*) &value;
