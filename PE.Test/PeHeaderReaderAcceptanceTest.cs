@@ -15,7 +15,7 @@ namespace PE.Test
 			string codeBase = Assembly.GetCallingAssembly().CodeBase;
 			UriBuilder uri = new UriBuilder(codeBase);
 			var assemblyDirectory = Path.GetDirectoryName(Uri.UnescapeDataString(uri.Path));
-			var path = Path.Combine(assemblyDirectory, "..", "..");
+			var path = Path.Combine(assemblyDirectory, "..", "..", "PE.Test");
 			Directory.SetCurrentDirectory(path);
 		}
 
