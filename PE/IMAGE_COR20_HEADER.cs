@@ -24,7 +24,7 @@ namespace PE
 		{
 			IMAGE_COR20_HEADER value;
 			byte* ptr = (byte*)&value;
-			int size = Marshal.SizeOf<IMAGE_COR20_HEADER>();
+			int size = Marshal.SizeOf(typeof(IMAGE_COR20_HEADER));
 			for (int i = 0; i < size; ++i)
 			{
 				*ptr++ = reader.ReadByte();

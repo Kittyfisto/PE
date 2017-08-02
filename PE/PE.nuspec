@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PE</id>
+    <version>$version$</version>
+    <authors>Kittyfisto</authors>
+    <owners>Kittyfisto</owners>
+    <licenseUrl>https://github.com/Kittyfisto/PE/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Kittyfisto/PE/</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library to parse PE (portable executable) images.</description>
+    <releaseNotes>Alpha release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>.NET PE Header Parsing</tags>
+    <dependencies>
+      <!--<dependency id="SampleDependency" version="1.0" />-->
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Release\PE.XML" target="lib\net45\" />
+    <file src="..\bin\Release\PE.pdb" target="lib\net45\" />
+    <file src="..\bin\Release\PE.dll" target="lib\net45\" />
+  </files>
+</package>

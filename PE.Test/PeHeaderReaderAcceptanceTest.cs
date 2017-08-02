@@ -22,7 +22,7 @@ namespace PE.Test
 		[Test]
 		public void TestParse()
 		{
-			var header = PeHeaderReader.ReadFrom("Resources\\SharpRemote.dll");
+			var header = PeHeader.ReadFrom("Resources\\SharpRemote.dll");
 			header.DosHeader.e_magic.Should().Be(0x5a4d);
 			header.DosHeader.e_cblp.Should().Be(0x0090);
 			header.DosHeader.e_cp.Should().Be(0x0003);

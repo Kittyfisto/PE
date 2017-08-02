@@ -6,10 +6,9 @@ using System.Text;
 namespace PE
 {
 	/// <summary>
-	///     Reads in the header information of the Portable Executable format.
-	///     Provides information such as the date the assembly was compiled.
+	///     Provides access to the header information of the Portable Executable format.
 	/// </summary>
-	public class PeHeaderReader
+	public class PeHeader
 	{
 		#region Private Fields
 
@@ -44,7 +43,7 @@ namespace PE
 
 		#region Public Methods
 		
-		public PeHeaderReader(IMAGE_DOS_HEADER dosHeader, IMAGE_FILE_HEADER fileHeader, IMAGE_OPTIONAL_HEADER32? peHeader32, IMAGE_OPTIONAL_HEADER64? peHeader64, IMAGE_SECTION_HEADER[] imageSectionHeaders, IMAGE_COR20_HEADER? cliHeader)
+		public PeHeader(IMAGE_DOS_HEADER dosHeader, IMAGE_FILE_HEADER fileHeader, IMAGE_OPTIONAL_HEADER32? peHeader32, IMAGE_OPTIONAL_HEADER64? peHeader64, IMAGE_SECTION_HEADER[] imageSectionHeaders, IMAGE_COR20_HEADER? cliHeader)
 		{
 			_dosHeader = dosHeader;
 			_fileHeader = fileHeader;
@@ -165,7 +164,7 @@ namespace PE
 
 		#endregion Properties
 
-		public static PeHeaderReader ReadFrom(string fileName)
+		public static PeHeader ReadFrom(string fileName)
 		{
 			using (var stream = File.OpenRead(fileName))
 			{
@@ -173,26 +172,26 @@ namespace PE
 			}
 		}
 
-		public static PeHeaderReader ReadFrom(Stream stream, bool leaveOpen = false)
+		public static PeHeader ReadFrom(Stream stream, bool leaveOpen = false)
 		{
-			PeHeaderReader peReader;
-			var error = TryReadFrom(stream, out peReader, leaveOpen);
+			PeHeader header;
+			var error = TryReadFrom(stream, out header, leaveOpen);
 			if (error != ReaderError.NoError)
 				throw new ArgumentException(string.Format("{0}", error));
 
-			return peReader;
+			return header;
 		}
 
-		public static ReaderError TryReadFrom(Stream stream, out PeHeaderReader peReader, bool leaveOpen = false, bool catchAllExceptions = true)
+		public static ReaderError TryReadFrom(Stream stream, out PeHeader header, bool leaveOpen = false, bool catchAllExceptions = true)
 		{
-			peReader = null;
+			header = null;
 
 			try
 			{
 				using (var reader = new BinaryReader(stream, Encoding.Default, leaveOpen))
 				{
 					var left = stream.Length - stream.Position;
-					if (left < Marshal.SizeOf<IMAGE_DOS_HEADER>())
+					if (left < Marshal.SizeOf(typeof(IMAGE_DOS_HEADER)))
 						return ReaderError.TooSmallForDosHeader;
 
 					var dosHeader = IMAGE_DOS_HEADER.Read(reader);
@@ -206,7 +205,7 @@ namespace PE
 					stream.Seek(fileHeaderOffset, SeekOrigin.Begin);
 
 					left = stream.Length - stream.Position;
-					if (left < Marshal.SizeOf<IMAGE_FILE_HEADER>())
+					if (left < Marshal.SizeOf(typeof(IMAGE_FILE_HEADER)))
 						return ReaderError.TooSmallForFileHeader;
 
 					var fileHeader = IMAGE_FILE_HEADER.Read(reader);
@@ -225,7 +224,7 @@ namespace PE
 						case 0x10b:
 
 							left = stream.Length - stream.Position;
-							if (left < Marshal.SizeOf<IMAGE_OPTIONAL_HEADER32>())
+							if (left < Marshal.SizeOf(typeof(IMAGE_OPTIONAL_HEADER32)))
 								return ReaderError.TooSmallForOptionalHeader;
 
 							peHeader32 = IMAGE_OPTIONAL_HEADER32.Read(reader);
@@ -234,7 +233,7 @@ namespace PE
 						case 0x20b:
 
 							left = stream.Length - stream.Position;
-							if (left < Marshal.SizeOf<IMAGE_OPTIONAL_HEADER64>())
+							if (left < Marshal.SizeOf(typeof(IMAGE_OPTIONAL_HEADER64)))
 								return ReaderError.TooSmallForOptionalHeader;
 
 							peHeader64 = IMAGE_OPTIONAL_HEADER64.Read(reader);
@@ -265,7 +264,7 @@ namespace PE
 						cliHeader = IMAGE_COR20_HEADER.Read(reader);
 					}
 
-					peReader = new PeHeaderReader(dosHeader, fileHeader, peHeader32, peHeader64, imageSectionHeaders, cliHeader);
+					header = new PeHeader(dosHeader, fileHeader, peHeader32, peHeader64, imageSectionHeaders, cliHeader);
 					return ReaderError.NoError;
 				}
 			}
@@ -274,7 +273,7 @@ namespace PE
 				if (catchAllExceptions)
 				{
 					Console.WriteLine("Caught unexpected exception: {0}", e);
-					peReader = null;
+					header = null;
 					return ReaderError.UnhandledException;
 				}
 

@@ -20,7 +20,7 @@ namespace PE
 		{
 			IMAGE_FILE_HEADER value;
 			byte* ptr = (byte*)&value;
-			int size = Marshal.SizeOf<IMAGE_FILE_HEADER>();
+			int size = Marshal.SizeOf(typeof(IMAGE_FILE_HEADER));
 			for (int i = 0; i < size; ++i)
 			{
 				*ptr++ = reader.ReadByte();

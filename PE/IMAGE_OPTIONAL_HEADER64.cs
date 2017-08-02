@@ -59,7 +59,7 @@ namespace PE
 		{
 			IMAGE_OPTIONAL_HEADER64 value;
 			byte* ptr = (byte*)&value;
-			int size = Marshal.SizeOf<IMAGE_OPTIONAL_HEADER64>();
+			int size = Marshal.SizeOf(typeof(IMAGE_OPTIONAL_HEADER64));
 			for (int i = 0; i < size; ++i)
 			{
 				*ptr++ = reader.ReadByte();

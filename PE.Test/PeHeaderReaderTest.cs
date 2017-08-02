@@ -30,9 +30,9 @@ namespace PE.Test
 
 			using (var stream = new MemoryStream(header))
 			{
-				PeHeaderReader reader = null;
+				PeHeader reader = null;
 				ReaderError error = ReaderError.NoError;
-				new Action(() => error = PeHeaderReader.TryReadFrom(stream, out reader, catchAllExceptions: false)).ShouldNotThrow();
+				new Action(() => error = PeHeader.TryReadFrom(stream, out reader, catchAllExceptions: false)).ShouldNotThrow();
 				reader.Should().BeNull();
 				error.Should().NotBe(ReaderError.NoError);
 			}
