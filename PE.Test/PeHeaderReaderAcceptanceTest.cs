@@ -9,12 +9,15 @@ namespace PE.Test
 	[TestFixture]
 	public sealed class PeHeaderReaderAcceptanceTest
 	{
+		
 		[OneTimeSetUp]
 		public void OneTimeSetup()
 		{
-			string codeBase = Assembly.GetCallingAssembly().CodeBase;
+			string codeBase = Assembly.GetExecutingAssembly().CodeBase;
 			UriBuilder uri = new UriBuilder(codeBase);
 			var assemblyDirectory = Path.GetDirectoryName(Uri.UnescapeDataString(uri.Path));
+			if (assemblyDirectory.EndsWith("netcoreapp2.0"))
+				assemblyDirectory = Path.Combine(assemblyDirectory, "..");
 			var path = Path.Combine(assemblyDirectory, "..", "..", "PE.Test");
 			Directory.SetCurrentDirectory(path);
 		}

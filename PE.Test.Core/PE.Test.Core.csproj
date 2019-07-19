@@ -6,6 +6,14 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin\Release\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\PE.Test\PeHeaderReaderAcceptanceTest.cs" Link="PeHeaderReaderAcceptanceTest.cs" />
     <Compile Include="..\PE.Test\PeHeaderReaderTest.cs" Link="PeHeaderReaderTest.cs" />
