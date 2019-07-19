@@ -294,10 +294,7 @@ namespace PE
 
 				// Add in the number of seconds since 1970/1/1
 				returnValue = returnValue.AddSeconds(_fileHeader.TimeDateStamp);
-				// Adjust to local timezone
-				returnValue += TimeZone.CurrentTimeZone.GetUtcOffset(returnValue);
-
-				return returnValue;
+				return returnValue.ToLocalTime();
 			}
 		}
 

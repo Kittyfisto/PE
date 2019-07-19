@@ -19,5 +19,10 @@
   </metadata>
   <files>
     <file src="..\bin\Release\PE.pdb" target="lib\net45\" />
+    <file src="..\bin\Release\PE.xml" target="lib\net45\" />
+
+    <file src="..\bin\Release\netstandard2.0\PE.dll" target="lib\netstandard2.0\" />
+    <file src="..\bin\Release\netstandard2.0\PE.pdb" target="lib\netstandard2.0\" />
+    <file src="..\bin\Release\netstandard2.0\PE.xml" target="lib\netstandard2.0\" />
   </files>
 </package>

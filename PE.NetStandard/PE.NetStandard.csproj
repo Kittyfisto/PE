@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>PE</AssemblyName>
+    <RootNamespace>PE</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\bin\Release\PE.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\bin\Debug\PE.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\PE\CHARACTERISTICS.cs" Link="CHARACTERISTICS.cs" />
+    <Compile Include="..\PE\COMIMAGE_FLAGS.cs" Link="COMIMAGE_FLAGS.cs" />
+    <Compile Include="..\PE\DataSectionFlags.cs" Link="DataSectionFlags.cs" />
+    <Compile Include="..\PE\IMAGE_COR20_HEADER.cs" Link="IMAGE_COR20_HEADER.cs" />
+    <Compile Include="..\PE\IMAGE_DATA_DIRECTORY.cs" Link="IMAGE_DATA_DIRECTORY.cs" />
+    <Compile Include="..\PE\IMAGE_DOS_HEADER.cs" Link="IMAGE_DOS_HEADER.cs" />
+    <Compile Include="..\PE\IMAGE_FILE_HEADER.cs" Link="IMAGE_FILE_HEADER.cs" />
+    <Compile Include="..\PE\IMAGE_OPTIONAL_HEADER32.cs" Link="IMAGE_OPTIONAL_HEADER32.cs" />
+    <Compile Include="..\PE\IMAGE_OPTIONAL_HEADER64.cs" Link="IMAGE_OPTIONAL_HEADER64.cs" />
+    <Compile Include="..\PE\IMAGE_SECTION_HEADER.cs" Link="IMAGE_SECTION_HEADER.cs" />
+    <Compile Include="..\PE\MACHINE.cs" Link="MACHINE.cs" />
+    <Compile Include="..\PE\PeHeader.cs" Link="PeHeader.cs" />
+    <Compile Include="..\PE\PortableExecutable.cs" Link="PortableExecutable.cs" />
+    <Compile Include="..\PE\ReaderError.cs" Link="ReaderError.cs" />
+    <Compile Include="..\PE\SUBSYSTEM.cs" Link="SUBSYSTEM.cs" />
+  </ItemGroup>
+
+</Project>
